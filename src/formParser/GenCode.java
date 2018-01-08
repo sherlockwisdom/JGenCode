@@ -132,19 +132,14 @@ public class GenCode {
 		outPutFile.close();
 	}
 	
-	public void editHTML() throws IOException {
-		//String input = "/home/maestro/Desktop/add.php";
+	public void editHTML(String projectFolder) throws IOException {
 		File file = new File(this.htmlFile);
-
 		Document doc = Jsoup.parse(file, "UTF-8", "");
-
-        //final File f = new File("filename.html");
 		List<FormElement> forms = doc.getAllElements().forms();
 		
-		for (FormElement form : forms) form.attr("action", "maincontroller.php");
-		
-		//System.out.println("Output file: " + this.newHtmlFile);
-        FileWriter writeFile = new FileWriter("New_" + file.getName(), false);
+		for (FormElement form : forms) form.attr("action", projectFolder + "maincontroller.php");
+        FileWriter writeFile = new FileWriter(projectFolder + file.getName(), false);
+        
         writeFile.write(doc.outerHtml());
         writeFile.close();
 	}
